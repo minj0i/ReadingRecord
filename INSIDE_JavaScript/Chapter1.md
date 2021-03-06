@@ -28,3 +28,4 @@ class 표현식은 ECMAScript 2015 (ES6)에서 클래스를 정의하는 한 방
 ## 1.6 자바스크립트 단점
 느슨한 타입 체크는 개발자에게 자유를 주지만 컴파일에서 잡지 못하여 런타임 오류로 발견됨. (=> TypeScript로 보완이 가능하다.)
 전역 객체 (=> ES6 let, const로 보완)
+![JS단점](https://i.redd.it/rz3o1yibnc511.png)
