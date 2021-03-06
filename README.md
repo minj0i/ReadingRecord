@@ -3,7 +3,7 @@
 
 ## 리스트
 > JavaScript 탐구
-- INSIDE JavaScript
+- [INSIDE JavaScript](https://github.com/minj0i/ReadingRecord/blob/main/INSIDE_JavaScript/index.md)
 - ECMA Script6
 
 > 좋은 코드를 위한 탐구
