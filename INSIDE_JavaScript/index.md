@@ -3,7 +3,7 @@
 **목적**: JavaScript 기본 이해 다지기
 
 ## 목차
-[Chapter1. 자바스크립트 기본 개요](https://github.com/minj0i/ReadingRecord/blob/main/INSIDE_JavaScript/index.md)      
+[Chapter1. 자바스크립트 기본 개요](https://github.com/minj0i/ReadingRecord/blob/main/INSIDE_JavaScript/Chapter1.md)      
 Chapter2. 자바스크립트 개발 환경   
 Chapter3. 자바스크립트 데이터 타입과 연산자   
 Chapter4. 함수와 프로토타입 체이닝   
