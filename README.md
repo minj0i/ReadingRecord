@@ -10,3 +10,6 @@
 - Clean Code
 - 읽기 좋은 자바스크립트 코딩 기법
 - 함수형 사고
+
+> React
+- [실전리액트프로그래밍](https://github.com/minj0i/ReadingRecord/blob/main/Actual_React_Programming/index.md)
