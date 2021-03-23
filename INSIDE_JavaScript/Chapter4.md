@@ -71,6 +71,89 @@ console.log(add(3, 4)); // 출력값 7
 
 ### 4.1.5 함수 호이스팅(Function Hoisting)
 함수 호이스팅 때문에 더글라스 크락포드는 `함수 표현식만`을 사용할 것을 권고함
-- 함수 선언문 방식   
+- 함수 선언문 방식
+  - 함수 선언문 현태로 정의한 함수의 유효 범위는 코드의 맨 처음부터 시작
+  - 함수를 사용하기 전에 반드시 선언해야 한다는 규칙을 무시함
 ```javascript
+add(2, 3); // 5 , 선언 전이라도 호출 가능
+
+function add(x, y) {
+  return x + y;
+}
+
+add(3, 4); // 7
 ```
+- 함수 표현식 방식
+```javascript
+add(2, 3); // uncaught type error
+
+// 함수 표현식 형태
+var add = function add(x, y) {
+  return x + y;
+};
+
+add(3, 4); // 7
+```
+함수 호이스팅이 발생하는 원인은 변수 생성(Instantiation)과 초기화(Intialization)의 작업이 분리되서 진행되기 때문
+
+## 4.2 함수 객체: 함수도 객체다
+### 4.2.1 자바스크립트에서는 함수도 객체다
+### 4.2.2 자바스크립트에서는 함수는 값으로 취급된다.
+자바스크립트에서 함수를 일급(First Class)객체라고 부른다. 함수는 다음 동작이 가능
+- 리터럴에 의해 생성
+- 변수나 배열의 요소, 객체의 프로퍼티 등에 할당 가능
+- 함수의 인자로 전달 가능
+- 함수의 리턴값으로 리턴 가능
+- 동적으로 프로퍼티를 생성 및 할당 가능
+#### 4.2.2.1 변수나 프로퍼티의 값으로 할당
+#### 4.2.2.2 함수 인자로 전달
+```javascript
+var foo = function(func) {
+  func(); // 인자로 받은 func() 함수 호출
+};
+
+foo(function() { // 익명 함수를 func 인자로 넘긴 것
+  console.log('Function can be used as the argument');
+})
+```
+#### 4.2.2.3 리턴값으로 활용
+```javascript
+var foo = function() {
+  return function() {
+    console.log('this function is the return value');
+  };
+};
+
+var bar = foo();
+bar();
+```
+### 4.2.3 함수 객체의 기본 프로퍼티
+일반 객체와는 다르게 추가로 함수 객체만의 표준 프로퍼티가 정의되어 있다.
+`length`와 `prototype 프로퍼티`등을 가짐
+- `name`: 함수의 이름, 익명함수라면 빈 문자열
+- `caller`: 자신을 호출한 함수. 호출하지 않았으면 null
+- `arguments`: 인자값. 호출하지 않았으면 null
+- `__proto__`: Function.prototype 객체, 함수 객체, Empty()함수. 모든 함수들의 부모 역할을 하는 프로토타입 객체
+  - constructor 프로퍼티
+  - toString() 메서드
+  - apply(thisArg, argArray) 메서드
+  - call(thisArg, [, arg1 [,arg2,]]) 메서드
+  - bind(thisArg, [,arg1 [,arg2,]]) 메서드
+
+### 4.2.3.1 length 프로퍼티
+함수를 작성할 때 정의한 인자 개수를 나타냄
+
+### 4.2.3.2 prototype 프로퍼티
+모든 객체의 부모를 나타내는 내부 프로퍼티인 [[Prototype]]과혼동하면 안됨. 모두 프로토타입 객체를 가르키는 공통점이 있으나, 모든 객체가 [[Prototype]] 을 가지지만 함수 객체가 가지는 Prototype 프로퍼티는 생성자로 사용될 때 이 함수를 통해 생성된 객체의 부모 역할을 하는 프로토타입 객체를 가리킨다.
+
+함수가 생성될 때 만들어지며, `constructor 프로퍼티`하나만 있는 객체를 가리킨다. 일반적으로 네이밍 하지는 않고 이름이 있는 경우(ex. add()) add.prototype이 된다.
+```javascript
+function myFunction() {
+  return true;
+}
+
+console.log(myFunction.prototype); // constructor와 __proto__가 나옴
+console.log(myFunction.prototype.constructor); // 함수 자체가 나옴
+```
+
+## 4.3 함수의 다양한 형태
