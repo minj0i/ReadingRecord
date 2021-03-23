@@ -157,3 +157,58 @@ console.log(myFunction.prototype.constructor); // 함수 자체가 나옴
 ```
 
 ## 4.3 함수의 다양한 형태
+### 4.3.1 콜백 함수
+익명함수의 대표적인 용도가 **콜백 함수**
+콜백 함수는 코드를 통해 명시적으로 호출하는 함수가 아니라, 개발자는 단지 함수를 등록하기만 하고, 어떤 이벤트가 발생했거나 특정 시점에 도달했을 때 시스템에서 호출되는 함수를 말한다. 또한, 특정 함수의 인자로 넘겨서, 코드 내부에서 호출되는 함수 또한 콜백 함수가 될 수 있다.
+
+대표적인 콜백 함수의 사용 예는 이벤트 핸들러 처리.   
+window.onload는 이벤트 핸들러로서, 웹 페이지의 로딩이 끝나는 시점에 load 이벤트가 발생하면 실행된다.
+```javascript
+window.onload = function() {
+  alert('This is callback Function');
+};
+```
+
+### 4.3.2 즉시 실행 함수(Immediate functions)
+함수를 정의함과 동시에 바로 실행하는 함수   
+함수 리터럴을 괄호()로 둘러 싼다. 그런 다음 바로 호출 될 수 있게 () 괄호 쌍을 추가한다.   
+같은 함수를 다시 호출할 수 없다. 따라서 **최초 한 번의 실행만을 필요로 하는 초기화 코드 부분**등에 사용된다.   
+대표적인 예는 jQuery. 즉시 실행 함수 내에 라이브러리 코드를 추가하면 전역 네임스페이스를 더럽히지 않으므로, 다른 라이브러리들이 동시에 로드되더라도 충돌하지 않음
+```javascript
+(function (name) {
+  console.log('This is the immediate function -> ' + name);
+})('foo');
+```
+
+### 4.3.3 내부 함수(Inner functions)
+클로저를 생성하거나 부모 함수 코드에서 외부에서의 접근을 막고 독립적인 헬퍼 함수를 구현하는 용도 등으로 사용.
+```javascript
+function parent() {
+  var a = 100;
+  var b = 200;
+
+  function child() {
+    var b = 300;
+
+    console.log(a);
+    console.log(b);
+  }
+  child(); // 100 300 - 스코프체이닝
+}
+  parent(); 
+  child(); // Uncaught ReferenceError: child is not defined
+```
+스코프체이닝: 내부 함수는 자신을 둘러싼 외부 함수의 변수에 접근 가능하다.
+
+### 4.3.4 함수를 리턴하는 함수
+```javascript
+var self = function() {
+  console.log('a');
+  return function() {
+    console.log('b');
+  }
+}
+
+self = self(); // a 출력하고 self()함수 변수가 가리키는 함수가 원래 함수에서 리턴 받은 새로운 함수로 변경되었음
+self(); // b
+```
