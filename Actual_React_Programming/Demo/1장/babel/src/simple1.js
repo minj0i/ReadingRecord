@@ -1,9 +1,8 @@
 function LikeButton() {
   const [liked, setLiked] = React.useState(false);
   const text = liked ? "좋아요 취소" : "좋아요";
-  return /*#__PURE__*/React.createElement("button", {
-    onClick: () => setLiked(!liked)
-  }, text); // return React.createElement(
+  return <button onClick={() => setLiked(!liked)}>{text}</button>;
+  // return React.createElement(
   //   "button",
   //   { onClick: () => setLiked(!liked) },
   //   text
@@ -12,16 +11,18 @@ function LikeButton() {
 
 function Container() {
   const [count, setCount] = React.useState(0);
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LikeButton, null), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", null, "\uD604\uC7AC\uCE74\uC6B4\uD2B8"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      marginRight: 10,
-      color: "green"
-    }
-  }, count), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setCount(count + 1)
-  }, "\uC99D\uAC00"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setCount(count - 1)
-  }, "\uAC10\uC18C"))); // return React.createElement(
+  return (
+    <div>
+      <LikeButton />
+      <div>
+        <span>현재카운트</span>
+        <span style={{ marginRight: 10, color: "green" }}>{count}</span>
+        <button onClick={() => setCount(count + 1)}>증가</button>
+        <button onClick={() => setCount(count - 1)}>감소</button>
+      </div>
+    </div>
+  );
+  // return React.createElement(
   //   "div",
   //   null,
   //   React.createElement(LikeButton),
